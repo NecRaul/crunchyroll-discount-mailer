@@ -52,18 +52,7 @@ def main():
 
                 # parsing the content from the url with BeautifulSoup + lxml
                 soup = BeautifulSoup(r.content, "lxml")
-
-                # it only gets the first 12 items on the list
-                # i get the number of pages (if it exists) to do more than 12
-                page_numbers = soup.find_all("li", class_="global-views-pagination-links-number")
-
-                if page_numbers != []:  # if the number of pages is more than 1
-                    for page_number in page_numbers:
-                        r = requests.get(url + "?page=" + page_number.text)
-                        soup = BeautifulSoup(r.content, "lxml")
-                        item_array = item_class.find_discounted_item(soup)
-                else:  # if the number of pages is 1
-                    item_array = item_class.find_discounted_item(soup)
+                item_array = item_class.find_discounted_item(soup)
                     
                 if len(item_array) != 0: # if any item in any url is on sale, it will send you mail
                     message_parts = create_email_message(item_array)
