@@ -5,26 +5,6 @@ import variables
 import item_class
 import mail
 
-def url_check(url):
-    pattern = r"^https?://(www\.)?store\.crunchyroll\.com/on/demandware\.store/Sites-CrunchyrollUS-Site/en_US/Wishlist-ShowOthers\?id=[a-zA-Z0-9]+$"
-    return re.match(pattern, url) is not False
-    
-def process_url(url):
-    # checking if the url is valid
-    is_valid_url = url_check(url)
-    
-    # adding https:// to the start of the string if url is not valid
-    url = f"https://{url}" if not is_valid_url else url
-    
-    # checking if the url is valid again
-    is_valid_url = url_check(url)
-    
-    if (not is_valid_url):
-        print("URL", url, "is not a Crunchyroll public wishlist.")
-        return None
-    else:
-        return url
-
 # custom sort key for books
 def custom_sort_key(book):
     parts = book.name.split()
@@ -48,8 +28,8 @@ def main():
         message["From"] = variables.sender_email
         message["To"] = variables.receiver_email
         
-        for key, value in variables.dict.items():
-            url = process_url(key) if process_url(key) else None
+        for key, value in variables.wishlists.items():
+            url = f"https://store.crunchyroll.com/on/demandware.store/Sites-CrunchyrollUS-Site/en_US/Wishlist-ShowOthers?id={key}"
             if (url):
                 item_array = item_class.find_discounted_item(url, value)
                     
