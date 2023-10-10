@@ -11,23 +11,21 @@ class Item:
 item_array = []
 
 def find_discounted_item(soup):
-    # information about the twelve items in the current page
-    items_content = soup.find_all(
-        "div", class_="facets-items-collection-view-cell-span3"
-    )
+    # information about the items in the current wishlist
+    items_content = soup.find_all("div", class_="cart-item-attributes-block")
+    
     for item_content in items_content:
-        # get each items' price
-        price_str = item_content.find(
-            "span", class_="product-views-price-lead", itemprop="price"
-        ).text
-
+        # get item's price
+        price_str = item_content.find("span", class_="sales").find("span", class_="value").get("content")
         # convert it to float
         price = float(price_str)
         if price < variables.base_price:
-            name = item_content.find("span", class_="facets-item-cell-grid-name").text
-            link = item_content.find(
-                "a", class_="facets-item-cell-grid-link-image"
-            ).get("href")
+            item_element = item_content.find("a", class_="line-item-name")
+            # get each item's name and link
+            name = item_element.text.strip()
+            link = item_element.get("href")
+            # create new item based on these values
             item = Item(name, price, link)
+            # add it to the item array
             item_array.append(item)
     return item_array
