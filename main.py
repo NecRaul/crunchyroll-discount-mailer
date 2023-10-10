@@ -11,10 +11,10 @@ def custom_sort_key(book):
     return (parts[0], int(parts[-1]))
 
 
-def create_email_message(item_array):
+def create_email_message(discounted_item_list):
     plain = ""
     html = "<html>\n\t<body>"
-    for item in item_array:
+    for item in discounted_item_list:
         plain += f"{item.name} - ${item.price}:{item.link}\n"
         html += f'\n\t\t<p><a href="{item.link}">{item.name}</a> - ${item.price}</p>'
     html += "\n\t</body>\n</html>"
@@ -33,14 +33,14 @@ def main():
         for key, value in variables.wishlists.items():
             url = f"https://store.crunchyroll.com/on/demandware.store/Sites-CrunchyrollUS-Site/en_US/Wishlist-ShowOthers?id={key}"
             if url:
-                item_array = item_class.find_discounted_item(url, value)
+                discounted_item_list = item_class.find_discounted_item(url, value)
 
                 # if any item in any url is on sale, it will send you mail
-                if len(item_array) != 0:
+                if len(discounted_item_list) != 0:
                     # use this if your wishlist consists of something other than books
-                    sorted_items = sorted(item_array, key=lambda x: x.name)
+                    sorted_items = sorted(discounted_item_list, key=lambda x: x.name)
                     # use this if your wishlist consists of books
-                    # sorted_items = sorted(item_array, key=custom_sort_key)
+                    # sorted_items = sorted(discounted_item_list, key=custom_sort_key)
 
                     message_parts = create_email_message(sorted_items)
 
