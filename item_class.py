@@ -9,8 +9,8 @@ class Item:
         self.link = "https://store.crunchyroll.com" + link
 
 
-# item array to contain items that we consider discounted
-item_array = []
+# item list to contain items that we consider discounted
+discounted_item_list = []
 
 
 def find_discounted_item(url, compare_price):
@@ -38,6 +38,6 @@ def find_discounted_item(url, compare_price):
             link = item_element.get("href")
             # create new item based on these values
             item = Item(name, price, link)
-            # add it to the item array
-            item_array.append(item)
-    return item_array
+            # add it to the item list
+            discounted_item_list.append(item)
+    return discounted_item_list
