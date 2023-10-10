@@ -20,5 +20,5 @@ email_subject = "Discounted Items"
 # public wishlist(s)
 # wishlist id: price
 wishlists = {
-    "": 0, 
+    "": 0,
 }
