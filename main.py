@@ -8,7 +8,7 @@ import item_class
 import mail
 
 def url_check(url):
-    pattern = "^https://www.rightstufanime.com/pl/.*$"
+    pattern = "^https://store.crunchyroll.com/on/demandware.store/Sites-CrunchyrollUS-Site/en_US/Wishlist-ShowOthers?id=.*$"
     return re.match(pattern, url) is not None
     
 def process_url(url):
