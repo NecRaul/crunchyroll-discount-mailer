@@ -4,7 +4,7 @@ class Item:
     def __init__(self, name, price, link):
         self.name = name
         self.price = price
-        self.link = "https://www.rightstufanime.com" + link
+        self.link = "https://store.crunchyroll.com" + link
 
 
 # item array to contain items that we consider discounted
