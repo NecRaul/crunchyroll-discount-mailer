@@ -24,6 +24,11 @@ def process_url(url):
         return None
     else:
         return url
+
+# custom sort key for books
+def custom_sort_key(book):
+    parts = book.name.split()
+    return (parts[0], int(parts[-1]))
         
 def create_email_message(item_array):
     plain = ""
@@ -43,13 +48,20 @@ def main():
         message["From"] = variables.sender_email
         message["To"] = variables.receiver_email
         
-        for key, value in variables.urls:
+        for key, value in variables.dict.items():
             url = process_url(key) if process_url(key) else None
             if (url):
                 item_array = item_class.find_discounted_item(url, value)
                     
                 if len(item_array) != 0: # if any item in any url is on sale, it will send you mail
-                    message_parts = create_email_message(sorted(item_array, key=lambda x: x.name))
+                    
+                    # uncomment/use this if your wishlist consists of something other than books
+                    sorted_items = sorted(item_array, key=lambda x: x.name)
+                    
+                    # uncomment/use this if your wishlist consists of books
+                    # sorted_items = sorted(item_array, key=custom_sort_key)
+                    
+                    message_parts = create_email_message(sorted_items)
 
                     # turn these into plain/html MIMEText objects
                     part1 = MIMEText(message_parts[0], "plain")
