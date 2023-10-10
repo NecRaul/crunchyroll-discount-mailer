@@ -43,10 +43,10 @@ def main():
         message["From"] = variables.sender_email
         message["To"] = variables.receiver_email
         
-        for url in variables.urls:
-            url = process_url(url) if process_url(url) else None
+        for key, value in variables.urls:
+            url = process_url(key) if process_url(key) else None
             if (url):
-                item_array = item_class.find_discounted_item(url)
+                item_array = item_class.find_discounted_item(url, value)
                     
                 if len(item_array) != 0: # if any item in any url is on sale, it will send you mail
                     message_parts = create_email_message(sorted(item_array, key=lambda x: x.name))
