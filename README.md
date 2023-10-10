@@ -46,8 +46,18 @@ wishlists = {
     "id2": 11.19,
     "id3": 23.49,
 }
-
 ```
+
+## How to find out my wishlist ID?
+
+Wishlist ID is located in the URL as a query parameter, following `id=`.
+Example url
+
+```Python
+https://store.crunchyroll.com/on/demandware.store/Sites-CrunchyrollUS-Site/en_US/Wishlist-ShowOthers?id=abc123
+```
+
+In this case your wishlist ID would be abc123.
 
 ### Note
 
