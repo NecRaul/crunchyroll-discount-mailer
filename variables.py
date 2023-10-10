@@ -17,7 +17,6 @@ receiver_email = ""
 # email subject
 email_subject = "Discounted Items"
 
-
 # public wishlist(s)
 # url: price
 dict = {

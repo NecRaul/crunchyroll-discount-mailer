@@ -12,7 +12,7 @@ class Item:
 # item array to contain items that we consider discounted
 item_array = []
 
-def find_discounted_item(url):
+def find_discounted_item(url, compare_price):
     r = requests.get(url)
     
     # parsing the content from the url with BeautifulSoup + lxml
@@ -26,7 +26,7 @@ def find_discounted_item(url):
         price_str = item_content.find("span", class_="sales").find("span", class_="value").get("content")
         # convert it to float
         price = float(price_str)
-        if price < variables.base_price:
+        if price < compare_price:
             item_element = item_content.find("a", class_="line-item-name")
             # get each item's name and link
             name = item_element.text.strip()
