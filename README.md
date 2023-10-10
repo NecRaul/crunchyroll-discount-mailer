@@ -1,12 +1,6 @@
-# rightstufanime-discount-mailer
+# crunchyroll-discount-mailer
 
 Mails you if anything on your public wishlist(s) is on discount.
-
-This repository is archived due to rightstufanime shutting down their services.
-
-## Public Archive
-
-As October 10, 2023 rightstufanime shut down their services.
 
 ## Requirements
 
@@ -24,7 +18,7 @@ Python's native `email`, `smtplib` and `ssl` packages are used to send mail once
 
 ## How it works
 
-You have to have a public wishlist(s) with more than 1 item in it. Each time you run the script, it will check all the items on your wishlist, compare it to the price you have specified, if any of them have gone below the specified price, you'll recieve an email with all the discounted items listed, along with their link and price.
+You need to have public wishlists with at least one item in them. When you run the script, it checks all items on your wishlists and compares their prices to the specified threshold. If an item's price falls below the threshold, you'll receive an email notification with the details of the discounted items.
 
 ## Variables
 
@@ -32,24 +26,29 @@ There is a `variables.py` file with information you have to fill. I have tested 
 
 ## App password
 
-By default gmail doesn't allow you to log in to your mail account with email and password. You will have to create an app password for that.
-
-How you would go about doing that is in this [link](https://help.warmupinbox.com/en/articles/4934806-configure-for-google-workplace-with-two-factor-authentication-2fa).
+By default, Gmail doesn't allow you to log in with your email and password directly. You'll need to create an "app password" for this purpose. Instructions on how to do this can be found [here](https://help.warmupinbox.com/en/articles/4934806-configure-for-google-workplace-with-two-factor-authentication-2fa).
 
 ## Automation
 
-You can use [cron](https://opensource.com/article/17/11/how-use-cron-linux) on Linux or Task Scheduler on Windows to automate the script running process.
+You can automate the script by using system-specific scheduling tools:
 
-For Windows, you'd have to put `python main.py` inside a `.bat` or `.ps1` file and use Task Scheduler.
-
-I haven't used any MacOS devices but cron should be available on there as well since it's a UNIX based distro. I have even less information about BSD but I would assume it has cron or a close equivalent.
+- For UNIX-based operating systems, use `cron`. You can learn more about [cron](https://opensource.com/article/17/11/how-use-cron-linux).
+- For Windows, create a .bat or .ps1 file containing the command python main.py and schedule it using Task Scheduler.
 
 ## If you couldn't get it to work
 
-It's probably because of the urls list in `variables.py`. Here's an example of how it should look like:
+If you encounter issues getting the script to work, the most likely culprit is the wishlists dictionary in variables.py. Ensure it is correctly formatted, like this:
 
 ```Python
-urls = ["https://www.rightstufanime.com/pl/1",
-        "https://www.rightstufanime.com/pl/2",
-        "https://www.rightstufanime.com/pl/3"]
+wishlists = {
+    # wishlist id: price to compare to
+    "id1": 10.99,
+    "id2": 11.19,
+    "id3": 23.49,
+}
+
 ```
+
+### Note
+
+This repository is built upon [rightstufanime-discount-mailer](https://github.com/NecRaul/rightstufanime-discount-mailer), which was archived because of Right Stuf Anime's acquisition by Sony/Crunchyroll.
