@@ -18,7 +18,7 @@ receiver_email = ""
 email_subject = "Discounted Items"
 
 # public wishlist(s)
-# url: price
-dict = {
+# wishlist id: price
+wishlists = {
     "": 0, 
 }
