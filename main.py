@@ -1,6 +1,4 @@
-import requests
 import re
-from bs4 import BeautifulSoup
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import variables
@@ -48,11 +46,7 @@ def main():
         for url in variables.urls:
             url = process_url(url) if process_url(url) else None
             if (url):
-                r = requests.get(url)
-
-                # parsing the content from the url with BeautifulSoup + lxml
-                soup = BeautifulSoup(r.content, "lxml")
-                item_array = item_class.find_discounted_item(soup)
+                item_array = item_class.find_discounted_item(url)
                     
                 if len(item_array) != 0: # if any item in any url is on sale, it will send you mail
                     message_parts = create_email_message(sorted(item_array, key=lambda x: x.name))

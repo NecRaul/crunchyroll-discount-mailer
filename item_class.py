@@ -1,4 +1,6 @@
 import variables
+import requests
+from bs4 import BeautifulSoup
 
 class Item:
     def __init__(self, name, price, link):
@@ -10,7 +12,12 @@ class Item:
 # item array to contain items that we consider discounted
 item_array = []
 
-def find_discounted_item(soup):
+def find_discounted_item(url):
+    r = requests.get(url)
+    
+    # parsing the content from the url with BeautifulSoup + lxml
+    soup = BeautifulSoup(r.content, "lxml")
+    
     # information about the items in the current wishlist
     items_content = soup.find_all("div", class_="cart-item-attributes-block")
     
