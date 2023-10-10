@@ -55,7 +55,7 @@ def main():
                 item_array = item_class.find_discounted_item(soup)
                     
                 if len(item_array) != 0: # if any item in any url is on sale, it will send you mail
-                    message_parts = create_email_message(item_array)
+                    message_parts = create_email_message(sorted(item_array, key=lambda x: x.name))
 
                     # turn these into plain/html MIMEText objects
                     part1 = MIMEText(message_parts[0], "plain")
