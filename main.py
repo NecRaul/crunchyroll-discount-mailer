@@ -22,7 +22,7 @@ def process_url(url):
     is_valid_url = url_check(url)
     
     if (not is_valid_url):
-        print("URL", url, "is not a rightstufanime public wishlist.")
+        print("URL", url, "is not a Crunchyroll public wishlist.")
         return None
     else:
         return url
