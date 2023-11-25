@@ -26,7 +26,7 @@ def main():
     if mail.email_check and mail.password_check:
         # setting up mail attributes for later
         message = MIMEMultipart("alternative")
-        message["Subject"] = variables.email_subjectsend_check
+        message["Subject"] = variables.email_subject
         message["From"] = variables.sender_email
         message["To"] = variables.receiver_email
 
